@@ -29,6 +29,7 @@ public class EscapeRoom
 
   public static void main(String[] args) 
   {      
+    Scanner in = new Scanner(System.in);
     // welcome message
     System.out.println("Welcome to EscapeRoom!");
     System.out.println("Get to the other side of the room, avoiding walls and invisible traps,");
@@ -45,7 +46,6 @@ public class EscapeRoom
     
     int score = 0;
 
-    Scanner in = new Scanner(System.in);
     String[] validCommands = { "right", "left", "up", "down", "r", "l", "u", "d",
     "jump", "jr", "jumpright", "jumpleft", "jl", "jumpup", "ju", "jumpdown", "jd",
     "pickup", "p", "quit", "q", "replay", "help", "?"};
@@ -66,31 +66,31 @@ public class EscapeRoom
       String input = UserInput.getValidInput(validCommands);
 	    /* process user commands*/
       if (input.equals("right") || input.equals("r")){
-        game.movePlayer(60, 0);
+        score += game.movePlayer(60, 0);
       }
       else if (input.equals("left") || input.equals("l")){
-        game.movePlayer(-60, 0);
+        score += game.movePlayer(-60, 0);
       }
       else if (input.equals("up") || input.equals("u")){
-        game.movePlayer(0, -60);
+        score += game.movePlayer(0, -60);
       }
       else if (input.equals("down") || input.equals("d")){
-        game.movePlayer(0, 60);
+        score += game.movePlayer(0, 60);
       }
       else if (input.equals("jumpr") || input.equals("jr")){
-        game.movePlayer(120, 0);
+        score += game.movePlayer(120, 0);
       }
       else if (input.equals("jumpl") || input.equals("jl")){
-        game.movePlayer(-120, 0);
+        score +=game.movePlayer(-120, 0);
       }
       else if (input.equals("jumpu") || input.equals("ju")){
-        game.movePlayer(0, -120);
+        score += game.movePlayer(0, -120);
       }
       else if (input.equals("jumpd") || input.equals("jd")){
-        game.movePlayer(0, 120);
+        score +=game.movePlayer(0, 120);
       }
       else if (input.equals("pickup") || input.equals("p")){
-        game.pickupPrize();
+        score += game.pickupPrize();
       }
       else if (input.equals("replay")){
         game.replay();
@@ -114,6 +114,30 @@ public class EscapeRoom
         System.out.println("INVALID INPUT");
         score -= 5;
       }
+      if (game.isTrap(60, 0) || game.isTrap(60, 0) || game.isTrap(60, 0) || game.isTrap(60, 0)){
+        System.out.println("There is a trap nearby! Do you want to spring?" );
+        String userInput = in.nextLine();
+        if (userInput.equals("yes") || userInput.equals("yes")){
+          System.out.println("Which side? " );
+          userInput = in.nextLine();
+            // spring in the chosen direction
+            if (userInput.equals("right") || userInput.equals("r")){
+                score += game.springTrap(60, 0);
+                
+              }
+              else if (userInput.equals("left") || userInput.equals("l")){
+                score += game.springTrap(-60, 0);
+                
+              }
+              else if (userInput.equals("up") || userInput.equals("u")){
+                score += game.springTrap(0, -60);
+              }
+              else if (userInput.equals("down") || userInput.equals("d")){
+                score += game.springTrap(0, 60);
+              }
+        }
+      }
+      System.out.println("Current Score: " + score);
     
 
     }
@@ -126,3 +150,6 @@ public class EscapeRoom
 }
 
         
+
+
+//do score, traps, 
