@@ -263,7 +263,7 @@ public class GameGUI extends JComponent
    * <P>
    * @return positive score if a location had a prize to be picked up, otherwise a negative penalty
    */
-  public int pickupPrize()
+  public int pickupPrize(boolean evilMode)
   {
     double px = playerLoc.getX();
     double py = playerLoc.getY();
@@ -274,7 +274,12 @@ public class GameGUI extends JComponent
       // if location has a prize, pick it up
       if (p.getWidth() > 0 && p.contains(px, py))
       {
-        System.out.println("YOU PICKED UP A PRIZE!");
+        if (evilMode == true){
+          System.out.println("BOOM");
+        }
+        else{
+          System.out.println("YOU PICKED UP A PRIZE!");
+        }
         p.setSize(0,0);
         repaint();
         return prizeVal;

@@ -51,7 +51,16 @@ public class EscapeRoom
     "pickup", "p", "quit", "q", "replay", "help", "?"};
   
     // set up game
+    boolean evilMode = false;
     boolean play = true;
+    System.out.println("Do you want to play normal or evil?");
+      String userGamemode = in.nextLine();
+      if (userGamemode.equals("evil")){
+        evilMode = true;
+      }
+      else{
+        evilMode = false;
+      }
     while (play)
     {
 
@@ -90,7 +99,15 @@ public class EscapeRoom
         score +=game.movePlayer(0, 120);
       }
       else if (input.equals("pickup") || input.equals("p")){
-        score += game.pickupPrize();
+        if (evilMode == true){
+          int randomNum = (int)(Math.random() * 2);
+          if (randomNum == 0){
+            score += game.pickupPrize(false);
+          }
+          else{
+            score -= game.pickupPrize(true);
+          }
+        }
       }
       else if (input.equals("replay")){
         game.replay();
