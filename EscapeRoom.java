@@ -108,6 +108,9 @@ public class EscapeRoom
             score -= game.pickupPrize(true);
           }
         }
+        else{
+          score += game.pickupPrize(false);
+        }
       }
       else if (input.equals("replay")){
         game.replay();
